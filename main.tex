@@ -3,27 +3,25 @@
 \usepackage{sysucode}  % 在论文中使用代码
 
 \input{docs/info}     % 论文相关信息
-\input{docs/proposal}   % 开题报告内容
 \input{docs/abstract}     % 摘要内容
-\input{docs/grading}    % 成绩评定记录表评语
-\input{docs/progress}   % 过程检查报告数据
+
+
 \begin{document}
 % 论文前置部分
 \frontmatter
 \pagenumbering{Roman}
 \makeUndergraduateCover    % 封面
 \makeUndergraduateTitlePage    % 扉页
-% \makeProposal% 开题报告
-% \makeProgressCheck  % 过程检查记录表
-% \makeDefenseRecord  % 答辩情况等级表
 \makedisclaim       % 学术诚信声明
+
 \makeabstract       % 中英文摘要
 \maketableofcontents        % 目录
-\makelistoffiguretable
+\makelistoffiguretable      % 图表目录
+\makenomenclature           % 主要符号表
+\makenomenclaturetable      % 主要符号表
 
 % 论文主体部分
 \mainmatter
-% 引言
 
 % 正文
 \include{docs/chap01}
@@ -58,6 +56,5 @@
 \newclearpage
 
 
-% \makeGrade      % 成绩评定记录表
 \end{document}
 

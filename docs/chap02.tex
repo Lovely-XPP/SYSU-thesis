@@ -268,6 +268,15 @@
     \label{fig:example-figure}
 \end{figure}
 
+\subsection{符号说明表}
+符号说明表的编译流程为
+
+xelatex -> makeindex main.nlo -s nomencl.ist -o main.nls -> xelatex
+
+添加条目的命令为
+\nomenclature{$\lambda$}{地理经度}
+$\backslash$nomenclature\{\$$\backslash$lambda\$\}\{地理经度\}
+
 \subsection{注释}
 
 毕业论文（设计）中有个别名词或情况需要解释时，可加注说明。注释采用脚注或尾注，应根据注释的先后顺序编排序号。注释序号以``①、②''等数字形式标示在正文中被注释词条的右上角，脚注或尾注内容中的序号应与被注释词条序号保持一致。
