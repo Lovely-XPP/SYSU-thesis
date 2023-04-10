@@ -15,9 +15,9 @@
 
 \LoadClass[
     % fontset=adobe2, % 可手动下载adobe，并选用此项
-    fontset=fandol,    % texlive自带，可移植字体库，只有常用的6763个汉字
+    %fontset=fandol,    % texlive自带，可移植字体库，只有常用的6763个汉字
     %fontset=ubuntu,
-    %fontset=mac,
+    fontset=mac,
     %fontset=windows,
     a4paper,
     %openright,
@@ -26,15 +26,7 @@
 ]{ctexbook}
 
 
-
-% 配置英文字体
-\RequirePackage{fontspec}
-% 如果\RequirePackage{newtxtext}能正常通过编译请注释以下三行，并取消第四行的注释
-%\renewcommand*{\rmdefault}{ntxtlf} % always TLF for math
-%\renewcommand*{\familydefault}{\rmdefault}
-%\setmainfont{Times New Roman} % 如果注释掉能正常编译，请注释
-\RequirePackage{newtxtext} % 文本自动采用新罗马字体
-
+% 导入必要的宏包
 % \RequirePackage[margin=1in,headsep=.2in, headheight=2in]{geometry}
 \RequirePackage[top=25mm, bottom=20mm, left=30mm, right=30mm,a4paper]{geometry}
 \RequirePackage{ifthen} % 用于判断
@@ -45,6 +37,7 @@
 \RequirePackage[labelsep=space]{caption}
 \RequirePackage[font=footnotesize]{subcaption}
 \RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage{txfonts}
 \RequirePackage{newtxmath} % 公式使用新罗马字体
 \RequirePackage{ragged2e} % 实现两端对齐
 \RequirePackage{listings}
@@ -69,6 +62,12 @@
 \RequirePackage{nth}
 \RequirePackage{changepage} % 引入调整段落整体宽度的宏包
 \RequirePackage[norefpage]{nomencl} % 符号表宏包
+
+
+% 配置英文字体
+\RequirePackage{fontspec}
+\setmainfont{Times New Roman}
+
 
 % 设定时间为中文日期
 \ctexset{today=small}
