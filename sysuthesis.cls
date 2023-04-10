@@ -588,8 +588,8 @@
          },
         section = {
           %fixskip = true,
-          beforeskip = {20pt},
-          afterskip = {10pt},
+          beforeskip = {0.5\baselineskip},
+          afterskip = {0.5\baselineskip},
           format = {},
           % F11 正文各节一级标题 黑体四号居中
           nameformat = {\zihao{4}\heiti},
@@ -597,8 +597,8 @@
          },
         subsection = {
                 %fixskip = true,
-                beforeskip = {20pt},
-                afterskip = {10pt},
+                beforeskip = {0.5\baselineskip},
+                afterskip = {0.5\baselineskip},
                 format = {},
                 % F12 正文各节二级及以下标题 宋体小四号加粗左对齐空两格
                 indent = {24pt},
@@ -606,8 +606,8 @@
                 titleformat = {\zihao{-4}\songti\bfseries}
             },
         subsubsection = {
-                beforeskip = {20pt},
-                afterskip = {10pt},
+                beforeskip = {0.5\baselineskip},
+                afterskip = {0.5\baselineskip},
                 format = {},
                 % F12 正文各节二级及以下标题 宋体小四号加粗左对齐空两格
                 indent = {24pt},
