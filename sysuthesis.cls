@@ -162,10 +162,27 @@
     \renewcommand{\headrule}{}
     \fancyfoot[C]{\zihao{5}第\hspace*{0.2em} \thepage \hspace*{0.2em} 页}
 }
+\fancypagestyle{main}{
+    \renewcommand{\headrule}{
+    \ifthenelse{\boolean{doublerule}}{\makedoubleheadrule}{\makeheadrule}% 
+    }
+    \fancyhf{}
+    % F18 页眉与页脚 宋体五号居中
+    \fancyfoot[C]{\zihao{5}第\hspace*{0.2em} \thepage \hspace*{0.2em} 页} % 页码位于页脚居中
+
+    % 左右两栏页眉，左为论文题目右为当前章
+    % \fancyhead[L]{\zihao{-5}\@ctitle}
+    % \fancyhead[R]{\zihao{-5}\leftmark}
+
+    % 居中式页眉，可以选择为论文题目或当前章
+    \fancyhead[C]{\zihao{5}\@ctitle}
+    %\fancyhead[C]{\zihao{-5}\leftmark}
+}
 % 样式调用
 \newcommand\cAbstractpagestyle{\cleardoublepage\pagestyle{cAbstract}\let\ps@plain\ps@cAbstract}
 \newcommand\eAbstractpagestyle{\cleardoublepage\pagestyle{eAbstract}\let\ps@plain\ps@eAbstract}
 \newcommand\contentspagestyle{\cleardoublepage\pagestyle{contents}\let\ps@plain\ps@contents}
+\newcommand\mainpagestyle{\cleardoublepage\pagestyle{main}\let\ps@plain\ps@main}
 
 
 % 表格与图片标题设定
@@ -518,7 +535,7 @@
     % \setlength{\cftbeforetoctitleskip}{0em}
     % 设置目录标题与目录正文的距离
     % \setlength{\cftaftertoctitleskip}{0em}
-    \pagestyle{plain}
+    \mainpagestyle
     % \contentspagestyle  % 采用自己设定的目录页眉页脚
     \section*{}
     \addcontentsline{toc}{chapter}{目\hspace{\ccwd}录}
@@ -602,13 +619,13 @@
     }
     % F13 正文内容  宋体小四号
     \zihao{-4}\songti \linespread{1.5}\selectfont
-    \pagestyle{plain}
+    \mainpagestyle
 }
 
 \renewcommand\backmatter{
     \@mainmatterfalse
     % \fancypagestyle{plain}{ \fancyhead[R]{\zihao{-5} \leftmark} }
-    \pagestyle{plain}
+    \mainpagestyle
 }
 
 % 参考文献
@@ -638,7 +655,7 @@
     % \fancypagestyle{plain}{
     %     \fancyhead[R]{\zihao{-5} 附录\thechapter \leftmark}
     % }
-    \pagestyle{plain}
+    \mainpagestyle
     \setcounter{chapter}{0}
     \setcounter{section}{0}
     \gdef\@chapapp{\appendixname}
