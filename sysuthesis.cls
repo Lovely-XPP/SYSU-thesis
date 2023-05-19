@@ -6,18 +6,19 @@
     \renewcommand{\newclearpage}{
         \clearpage{
             \pagestyle{empty}
-            \cleardoublepage
+            \clearpage
         }
     }
 }  
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
 
+
 \LoadClass[
-    % fontset=adobe2, % 可手动下载adobe，并选用此项
+    %fontset=adobe2, % 可手动下载adobe，并选用此项
     %fontset=fandol,    % texlive自带，可移植字体库，只有常用的6763个汉字
     %fontset=ubuntu,
-    %fontset=mac,
+    %fontset=macnew,
     %fontset=windows,
     a4paper,
     %openright,
@@ -26,7 +27,6 @@
 ]{ctexbook}
 
 
-% 导入必要的宏包
 % \RequirePackage[margin=1in,headsep=.2in, headheight=2in]{geometry}
 \RequirePackage[top=25mm, bottom=20mm, left=30mm, right=30mm,a4paper]{geometry}
 \RequirePackage{ifthen} % 用于判断
@@ -36,9 +36,9 @@
 \RequirePackage{graphicx}
 \RequirePackage[labelsep=space]{caption}
 \RequirePackage[font=footnotesize]{subcaption}
-\RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage{amsmath,amsthm}
 \RequirePackage{txfonts}
-\RequirePackage{newtxmath} % 公式使用新罗马字体
+\RequirePackage{newtxmath}
 \RequirePackage{ragged2e} % 实现两端对齐
 \RequirePackage{listings}
 \RequirePackage{longtable}
@@ -67,7 +67,6 @@
 % 配置英文字体
 \RequirePackage{fontspec}
 \setmainfont{Times New Roman}
-
 
 % 设定时间为中文日期
 \ctexset{today=small}
@@ -107,7 +106,8 @@
 \renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
 % 采用带圈数字符号代替*号脚注
 \xeCJKsetcharclass{`①}{`⑩}{1}
-
+% 章节标注设置
+\renewcommand{\chaptermark}[1]{\markboth{\;第\ \thechapter\ 章\quad#1\;}{}}
 
 %% 页眉页脚样式
 % 页脚线
@@ -137,29 +137,32 @@
     % F18 页眉与页脚 宋体五号居中
     \fancyfoot[C]{\zihao{5}第\hspace*{0.2em} \thepage \hspace*{0.2em} 页} % 页码位于页脚居中
 
-    % 左右两栏页眉，左为论文题目右为当前章
-    % \fancyhead[L]{\zihao{-5}\@ctitle}
-    % \fancyhead[R]{\zihao{-5}\leftmark}
-
-    % 居中式页眉，可以选择为论文题目或当前章
-    \fancyhead[C]{\zihao{5}\@ctitle}
-    %\fancyhead[C]{\zihao{-5}\leftmark}
+    % 居中式页眉，为当前章
+    \fancyhead[C]{\zihao{5}\leftmark}
 }
 \pagestyle{plain}
 % 中英文摘要页面样式
 \fancypagestyle{cAbstract}{
-    \fancyhead[L]{\zihao{-5}\@ctitle}
-    \fancyhead[R]{\zihao{-5}摘要}
+    \fancyhead[C]{\zihao{5}摘要}
 }
 \fancypagestyle{eAbstract}{
-    \fancyhead[L]{\zihao{-5}\@etitle}
-    \fancyhead[R]{\zihao{-5}ABSTRACT}
+    \fancyhead[C]{\zihao{5}ABSTRACT}
 }
 % 目录样式
 \fancypagestyle{contents}{
-    \fancyhf{}
-    \renewcommand{\headrule}{}
-    \fancyfoot[C]{\zihao{5}第\hspace*{0.2em} \thepage \hspace*{0.2em} 页}
+    \fancyhead[C]{\zihao{5}\leftmark}
+}
+% 参考文献样式
+\fancypagestyle{references}{
+    \fancyhead[C]{\zihao{5}参考文献}
+}
+% 参考文献样式
+\fancypagestyle{appendix}{
+    \fancyhead[C]{\zihao{5}附录}
+}
+% 致谢样式
+\fancypagestyle{thanks}{
+    \fancyhead[C]{\zihao{5}致谢}
 }
 \fancypagestyle{main}{
     \renewcommand{\headrule}{
@@ -174,14 +177,17 @@
     % \fancyhead[R]{\zihao{-5}\leftmark}
 
     % 居中式页眉，可以选择为论文题目或当前章
-    \fancyhead[C]{\zihao{5}\@ctitle}
-    %\fancyhead[C]{\zihao{-5}\leftmark}
+    \fancyhead[OC]{\zihao{5}\@ctitle}
+    \fancyhead[EC]{\zihao{5}\leftmark}
 }
 % 样式调用
-\newcommand\cAbstractpagestyle{\cleardoublepage\pagestyle{cAbstract}\let\ps@plain\ps@cAbstract}
-\newcommand\eAbstractpagestyle{\cleardoublepage\pagestyle{eAbstract}\let\ps@plain\ps@eAbstract}
-\newcommand\contentspagestyle{\cleardoublepage\pagestyle{contents}\let\ps@plain\ps@contents}
-\newcommand\mainpagestyle{\cleardoublepage\pagestyle{main}\let\ps@plain\ps@main}
+\newcommand\cAbstractpagestyle{\clearpage\pagestyle{cAbstract}\let\ps@plain\ps@cAbstract}
+\newcommand\eAbstractpagestyle{\clearpage\pagestyle{eAbstract}\let\ps@plain\ps@eAbstract}
+\newcommand\contentspagestyle{\clearpage\pagestyle{contents}\let\ps@plain\ps@contents}
+\newcommand\appendixpagestyle{\clearpage\pagestyle{appendix}\let\ps@plain\ps@appendix}
+\newcommand\referencespagestyle{\clearpage\pagestyle{references}\let\ps@plain\ps@references}
+\newcommand\thankspagestyle{\clearpage\pagestyle{thanks}\let\ps@plain\ps@thanks}
+\newcommand\mainpagestyle{\clearpage\pagestyle{main}\let\ps@plain\ps@main}
 
 
 % 表格与图片标题设定
@@ -192,6 +198,7 @@
 % F19 图题表题 宋体五号
 \DeclareCaptionFormat{sysucaption}{\fontsize{10.5}{10.5}\selectfont#1#2#3}
 \captionsetup{format=sysucaption}
+\captionsetup[subfloat]{format=sysucaption}
 
 
 % 目录设定，使用tocloft宏包
@@ -324,9 +331,9 @@
                     \centering
                     \begin{tabular}{l}
                         % F1: 论文题目 黑体二号居中
-                        \makebox[1.5cm]{题目：\hfill} \underline{\makebox[13cm]{\hfill\zihao{2}\textbf\@covertitlefirst\hfill}} \\
+                        \makebox[1.5cm]{题目：\hfill} \underline{\makebox[12.5cm]{\hfill\zihao{2}\textbf\@covertitlefirst\hfill}} \\
                         % \vspace{1pt}\\
-                        \makebox[1.5cm]{\hfill} \underline{\makebox[13cm]{\hfill\zihao{2}\textbf\@covertitlesecond\hfill}}      \\
+                        \makebox[1.5cm]{\hfill} \underline{\makebox[12.5cm]{\hfill\zihao{2}\textbf\@covertitlesecond\hfill}}      \\
                     \end{tabular}
                 }
                 \ \vspace{1.3cm} \\
@@ -519,23 +526,23 @@
 % 摘要
 \newcommand\makeabstract{
     \setcounter{page}{1}
-    % \cAbstractpagestyle  % 采用自己设定的摘要页眉页脚
+    \cAbstractpagestyle  % 采用自己设定的摘要页眉页脚
     \makecabstract
     
     \newclearpage
-    % \eAbstractpagestyle  % 采用自己设定的摘要页眉页脚
+    \eAbstractpagestyle  % 采用自己设定的摘要页眉页脚
     \makeeabstract
     \newclearpage
 }
 
-% 表格目录
+% 目录
 \newcommand\maketableofcontents{
     % 设置目录标题与页眉的距离
     % \setlength{\cftbeforetoctitleskip}{0em}
     % 设置目录标题与目录正文的距离
     % \setlength{\cftaftertoctitleskip}{0em}
     \mainpagestyle
-    % \contentspagestyle  % 采用自己设定的目录页眉页脚
+    \contentspagestyle  % 采用自己设定的目录页眉页脚
     \section*{}
     \addcontentsline{toc}{chapter}{目\hspace{\ccwd}录}
     \vspace*{-2.8cm}
@@ -545,7 +552,7 @@
 
 % 插图目录
 \newcommand\makelistoffiguretable{
-    % \contentspagestyle  % 采用自己设定的目录页眉页脚
+    %\contentspagestyle  % 采用自己设定的目录页眉页脚
     \section*{}
     \addcontentsline{toc}{chapter}{插图目录}
     \vspace*{-2.8cm}
@@ -562,7 +569,21 @@
 \renewcommand{\pagedeclaration}[1]{, #1}
 \setlength{\nomitemsep}{-0.2cm}
 \newcommand\makenomenclaturetable{
-    % \contentspagestyle  % 采用自己设定的目录页眉页脚
+    \ctexset {
+        chapter = {
+          %fixskip = true,
+          beforeskip = {10pt},
+          afterskip = {20pt},
+          format = {\centering},
+          % F10 正文各章标题 黑体三号居中
+          nameformat = {\zihao{3}\heiti},
+          name = {,},
+          number = {\arabic{chapter}},
+          % aftername = {},
+          titleformat = {\zihao{3}\heiti}
+         }
+    }
+    %\contentspagestyle  % 采用自己设定的目录页眉页脚
     \section*{}
 	\printnomenclature[1.32in]
     \addcontentsline{toc}{chapter}{符号和缩略语说明}
@@ -631,6 +652,7 @@
 % 标题小五号黑体加冒号
 % 内容小五号宋体
 \newcommand\makereferences{
+    \referencespagestyle
     \begingroup
     \ctexset {
         chapter = {
@@ -654,7 +676,7 @@
     % \fancypagestyle{plain}{
     %     \fancyhead[R]{\zihao{-5} 附录\thechapter \leftmark}
     % }
-    \mainpagestyle
+    \appendixpagestyle
     \setcounter{chapter}{0}
     \setcounter{section}{0}
     \gdef\@chapapp{\appendixname}
@@ -715,4 +737,4 @@
         \@ctrerr
     \fi
 }
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\thefootnote}{\textsuperscript{\fnsymbol{footnote}}}
